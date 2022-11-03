@@ -12,5 +12,5 @@ juego wordix desarrollado por Introduccion a la Programacion FAI
  ## Corrales, Abigail Candelaria ##
  LEGAJO 4251 -- Email: abigail.corrales@est.fi.uncoma.edu.ar -- Github AbigailCo
 
- ## Mamani, Ariel ## 
+ ## Mamani, Ariel Maximiliano## 
  LEGAJO 3607 -- Email:ariel.mamani@est.fi.uncoma.edu.ar -- Github Ariel-Mamani
