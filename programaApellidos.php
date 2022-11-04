@@ -89,6 +89,9 @@ if($opcion==1){
     echo "Numero de palabra que desea jugar: ";
     $numeroPalabra=solicitarNumeroEntre($min,$max);
     $partida = jugarWordix($palabraWordix[$numeroPalabra-1], strtolower($nombre));
+    
+    
+
 
 
 }elseif($opcion==2){

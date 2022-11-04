@@ -29,7 +29,7 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /**
  *  ****COMPLETAR*****
  */
-function solicitarNumeroEntre($min, $max)
+function solicitarNumeroEntre($min, $max)//solucionar el WHILE A  10, 5.5
 {
     //int $numero
     $numero = trim(fgets(STDIN));
