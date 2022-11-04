@@ -32,10 +32,9 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 function solicitarNumeroEntre($min, $max)
 {
     //int $numero
-    //Solicita un numero y verifica si es entero y si esta dentro de un rango que lo definiran los parametros formales
     $numero = trim(fgets(STDIN));
-    while (!is_int($numero) && !($numero >= $min && $numero <= $max)) {
-        echo "Debe ingresar un número entre " . $min . " y " . $max . ": ";
+    while (!is_int($numero)  && !($numero >= $min && $numero <= $max)) {
+        echo "ERROR! Debe ingresar un número entre " . $min . " y " . $max . ": ";
         $numero = trim(fgets(STDIN));
     }
     return $numero;
