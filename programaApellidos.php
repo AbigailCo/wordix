@@ -32,7 +32,7 @@ function cargarColeccionPalabras()
     return ($coleccionPalabras);
 }
 //Modulo carga una coleccion de partidas en un arreglo indexado y asociativo
-
+function cargarColeccionPartida (){
     $coleccionPartidas[0] = ["palabraWordix "=> "QUESO" , "jugador" => "majo", "intentos"=> 0, "puntaje" => 0];
     $coleccionPartidas[1] = ["palabraWordix "=> "CASAS" , "jugador" => "rudolf", "intentos"=> 3, "puntaje" => 14];
     $coleccionPartidas[2] = ["palabraWordix "=> "PIANO" , "jugador" => "pink2000", "intentos"=> 6, "puntaje" => 10];
@@ -45,11 +45,9 @@ function cargarColeccionPalabras()
     $coleccionPartidas[9] = ["palabraWordix "=> "QUESO" , "jugador" => "majo", "intentos"=> 0, "puntaje" => 0];
     $coleccionPartidas[10] = ["palabraWordix "=> "CASAS" , "jugador" => "rudolf", "intentos"=> 3, "puntaje" => 14];
     $coleccionPartidas[11] = ["palabraWordix "=> "NIÑOS" , "jugador" => "pink2000", "intentos"=> 6, "puntaje" => 10];
-
-
-
-
-
+    
+    return $coleccionPartidas;
+}
 /* ... COMPLETAR ... */
 
 
@@ -101,33 +99,35 @@ if($opcion==1){
     $partida = jugarWordix($palabraWordix[$numAleatorio], strtolower($nombre));//$numAleatorio va ser mi indice para la palabra aleatoria
     
 }elseif($opcion==3){
+    $arrayPartidas = cargarColeccionPartida();
     echo "Que numero de partida quiere ver: ";
-    $numPartida= solicitarNumeroEntre(1,count($coleccionPartidas));
-    $numPartida = $numPartida;
-    echo "\n Partida WORDIX numero ". $numPartida . " : palabra: ". $coleccionPartidas[$numPartida-1]["palabraWordix "];
-    echo "\n Jugador : ". $coleccionPartidas [$numPartida]["jugador"];
-    echo "\n Puntaje : ". $coleccionPartidas [$numPartida]["puntaje"];
-    if ($coleccionPartidas [$numPartida]["puntaje"] == 0){
+    $numPartida= solicitarNumeroEntre(1,count($arrayPartidas));
+   
+    echo "\n Partida WORDIX numero ". $numPartida . " : palabra: ". $arrayPartidas[$numPartida-1]["palabraWordix "];
+    echo "\n Jugador : ". $arrayPartidas [$numPartida]["jugador"];
+    echo "\n Puntaje : ". $arrayPartidas [$numPartida]["puntaje"];
+    if ($arrayPartidas [$numPartida]["puntaje"] == 0){
         echo "\n Intentos : No adivino la palabra.";
     }else{
-        echo "\n Intentos : ". $coleccionPartidas [$numPartida]["intentos"];
+        echo "\n Intentos : ". $arrayPartidas [$numPartida]["intentos"];
     }
 }elseif($opcion==4){
+    $arrayPartidas = cargarColeccionPartida();
     echo "Nombre del jugador que desea ver la partida : ";
     $nomPartidaGanada = trim (fgets(STDIN));
 
     $i=0;
-    $recorrido= count($coleccionPartidas);
+    $recorrido= count($arrayPartidas);
     $gano= false;
     $existeJugador = false;
     while ($i < $recorrido && !$gano){
-        if ($nomPartidaGanada == $coleccionPartidas[$i]["jugador"]){
+        if ($nomPartidaGanada == $arrayPartidas[$i]["jugador"]){
             $existeJugador=true;
-            if ($coleccionPartidas[$i]["puntaje"] != 0){
-                echo "\nPartida WORDIX numero ". $i . " : palabra: ". $coleccionPartidas[$i]["palabraWordix "];
-                echo "\n Jugador : ". $coleccionPartidas [$i]["jugador"];
-                echo "\nPuntaje : ". $coleccionPartidas [$i]["puntaje"];
-                echo "\nIntentos : ". $coleccionPartidas [$i]["intentos"];
+            if ($arrayPartidas[$i]["puntaje"] != 0){
+                echo "\nPartida WORDIX numero ". $i . " : palabra: ". $arrayPartidas[$i]["palabraWordix "];
+                echo "\n Jugador : ". $arrayPartidas [$i]["jugador"];
+                echo "\nPuntaje : ". $arrayPartidas [$i]["puntaje"];
+                echo "\nIntentos : ". $arrayPartidas [$i]["intentos"];
                 $gano = true;
             }
         }
