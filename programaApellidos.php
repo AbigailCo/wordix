@@ -32,7 +32,11 @@ function cargarColeccionPalabras()
     return ($coleccionPalabras);
 }
 //Modulo carga una coleccion de partidas en un arreglo indexado y asociativo
+/**
+ * @return array
+ */
 function cargarColeccionPartida (){
+    //array $coleccionPartidas
     $coleccionPartidas[0] = ["palabraWordix "=> "QUESO" , "jugador" => "majo", "intentos"=> 0, "puntaje" => 0];
     $coleccionPartidas[1] = ["palabraWordix "=> "CASAS" , "jugador" => "rudolf", "intentos"=> 3, "puntaje" => 14];
     $coleccionPartidas[2] = ["palabraWordix "=> "PIANO" , "jugador" => "pink2000", "intentos"=> 6, "puntaje" => 10];
@@ -45,8 +49,79 @@ function cargarColeccionPartida (){
     $coleccionPartidas[9] = ["palabraWordix "=> "QUESO" , "jugador" => "majo", "intentos"=> 0, "puntaje" => 0];
     $coleccionPartidas[10] = ["palabraWordix "=> "CASAS" , "jugador" => "rudolf", "intentos"=> 3, "puntaje" => 14];
     $coleccionPartidas[11] = ["palabraWordix "=> "NIÑOS" , "jugador" => "pink2000", "intentos"=> 6, "puntaje" => 10];
-
-
+   return $coleccionPartidas;
+}
+//MODULO que retorna resumen del jugador dado el arreglo coleccion de partidas y el nombre deljugador
+/**
+ * genera el historial de juego del jugador
+ * @param $arrayPartidas
+ * @param $jugador
+ * @return array
+ */
+function generaResumen($arrayPartidas,$jugador){
+    //int $i, $numeroIntento, $numeroIntento1, $numeroIntento2, $numeroIntento3, $numeroIntento4, $numeroIntento5, $puntaje, $victoria, $partidas
+    //string $nombre
+    //array $resumenPartida
+    $numeroIntento=0;
+    $numeroIntento1=0;
+    $numeroIntento2=0;
+    $numeroIntento3=0;
+    $numeroIntento4=0;
+    $numeroIntento5=0;
+    $contadorPartida=0;
+    $puntaje=0;
+    $victoria=0;
+    $partidas=count($arrayPartidas);
+    for($i=0;$i<$partidas;$i++){
+        if($arrayPartidas[$i]["jugador"]==$jugador){
+            $contadorPartida=$contadorPartida+1;
+            switch($arrayPartidas[$i]["intentos"]){
+                case 1:
+                    $numeroIntento=$numeroIntento+1;
+                    break;
+                case 2:
+                    $numeroIntento1=$numeroIntento1+1;
+                    break;
+                case 3:
+                    $numeroIntento2=$numeroIntento2+1;
+                    break;
+                case 4:
+                    $numeroIntento3=$numeroIntento3+1;
+                    break;
+                case 5:
+                    $numeroIntento4=$numeroIntento4+1;
+                    break;
+                case 6:
+                    $numeroIntento5=$numeroIntento5+1;
+                    break;
+            }
+            $puntaje=$puntaje+$arrayPartidas[$i]["puntaje"];
+            if($arrayPartidas[$i]["puntaje"]>0){
+                $victoria=$victoria+1;
+            }
+        }
+            /*if($arrayPartidas[$i]["intentos"]==1){   otra opcion para calcular los intentos
+                $numeroIntento=$numeroIntento+1;
+            }elseif($arrayPartidas[$i]["intentos"]==2){
+                $numeroIntento1=$numeroIntento1+1;
+            }elseif($arrayPartidas[$i]["intentos"]==3){
+                $numeroIntento2=$numeroIntento2+1;
+            }elseif($arrayPartidas[$i]["intentos"]==4){
+                $numeroIntento3=$numeroIntento3+1;
+            }elseif($arrayPartidas[$i]["intentos"]==5){
+                $numeroIntento4=$numeroIntento4+1;
+            }elseif($arrayPartidas[$i]["intentos"]==6){
+                $numeroIntento5=$numeroIntento5+1;
+            }
+       */
+}
+$resumenPartida=["jugador"=>$jugador,"partida"=>$contadorPartida,"puntaje"=>$puntaje,
+                    "victoria"=>$victoria,"intento1"=>$numeroIntento,"intento2"=>$numeroIntento1,
+                    "intento3"=>$numeroIntento2,"intento4"=>$numeroIntento3,"intento5"=>$numeroIntento4,"intento6"=>$numeroIntento5];
+return $resumenPartida;
+}
+//MODULO  carga los resumenes de las partidas(arreglo asociativo)
+   
 
 
 
@@ -152,30 +227,32 @@ if($opcion==1){
     $jugador=trim(fgets(STDIN));
     $i=0;
     $bandera=true;
-    while($i<count($arrayPartidas) && $bandera){
-       if($arrayPartidas[$i]["jugador"]==$jugador){
+    while($i<count($arrayPartidas) && $bandera){   //aca vamos a recorrer el arreglo buscando el nombre ingresado
+       if($arrayPartidas[$i]["jugador"]==$jugador){ //verificamos si el nombre ingresado esta en el arreglo
           $bandera=false;
           $jugador=$arrayPartidas[$i]["jugador"];
-          $resumen=generaResumen($arrayPartidas,$jugador);
+          $resumen=generaResumen($arrayPartidas,$jugador); //invocamos el modulo que genera el arreglo $resumenPartidas(para las estadisticas)
        }
-        $arrayPartidas[$i]["jugador"];
         $i=$i+1;
     }
-    if($bandera){
-        echo "no se encontro un jugador con ese nombre"
+    if($bandera){    
+        echo "no se encontro un jugador con ese nombre"; //si el nombre ingresado no se encuentra en el arreglo jamas va a entrar al primer IF de arriba
     }else{
-        echo "jugador: ".$resumenPartidas["jugador"]=$jugador."\n";//aca iria el nombre del modulo ($resumen)
-        echo "Partidas: ".$resumenPartidas["partida"]=0;
-        echo "Puntaje Total: ".$resumenPartidas["puntaje"] ;
-        echo "Victorias: ".$resumenPartidas["vitoria"] ;
-        echo "Porcentaje Victorias: ";
-        echo "Adivinadas: ";
-        echo "      Intento 1: ".$resumenPartidas["intento1"] ;
-        echo "      Intento 2: ".$resumenPartidas["intento2"] ;
-        echo "      Intento 3: ".$resumenPartidas["intento3"] ;
-        echo "      Intento 4: ".$resumenPartidas["intento4"] ;
-        echo "      Intento 5: ".$resumenPartidas["intento5"] ;
-        echo "      Intento 6: ".$resumenPartidas["intento6"] ;
+        $lasVictorias=$resumen["victoria"];
+        $laPartida=$resumen["partida"];
+        $porcentajeVictorias=($lasVictorias*100)/$laPartida;
+        echo "jugador: ".$resumen["jugador"]."\n";
+        echo "Partidas: ".$resumen["partida"]."\n";
+        echo "Puntaje Total: ".$resumen["puntaje"] ."\n";
+        echo "Victorias: ".$resumen["victoria"]."\n" ;
+        echo "Porcentaje Victorias:".$porcentajeVictorias."%"."\n";
+        echo "Adivinadas: "."\n";
+        echo "      Intento 1: ".$resumen["intento1"] ."\n";
+        echo "      Intento 2: ".$resumen["intento2"]."\n" ;
+        echo "      Intento 3: ".$resumen["intento3"] ."\n";
+        echo "      Intento 4: ".$resumen["intento4"] ."\n";
+        echo "      Intento 5: ".$resumen["intento5"]."\n";
+        echo "      Intento 6: ".$resumen["intento6"] ."\n";
     }  
 }elseif($opcion==6){
     
