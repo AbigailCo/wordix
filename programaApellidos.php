@@ -46,7 +46,38 @@ function cargarColeccionPalabras()
     $coleccionPartidas[10] = ["palabraWordix "=> "CASAS" , "jugador" => "rudolf", "intentos"=> 3, "puntaje" => 14];
     $coleccionPartidas[11] = ["palabraWordix "=> "NIÑOS" , "jugador" => "pink2000", "intentos"=> 6, "puntaje" => 10];
 
+//MODULO que retorna resumen del jugador dado el arreglo coleccion de partidas y el nombre deljugador
+/**
+ * genera el historial de juego del jugador
+ * @param $coleccionPartidas
+ * @param $jugador
+ * @return array
+ */
+function generaResumen($coleccionPartidas,$jugador){
+    /* */
+    $resumenPartidas=[];
+   
+    $partidas=count($coleccionPartidas);
+    for($i=0;$i<$partidas;$i++){
+        $
 
+}
+//MODULO  carga los resumenes de las partidas(arreglo asociativo)
+   $jugador="";
+   $numeroPartida=0;
+   $puntaje=0;
+   $victoria=0;
+   $numeroIntento=0;
+   $numeroIntento1=0;
+   $numeroIntento2=0;
+   $numeroIntento3=0;
+   $numeroIntento4=0;
+   $numeroIntento5=0;
+   $numeroIntento6=0;
+   
+   $resumenPartida=["jugador"=>$jugador,"partida"=>$numeroPartida,"puntaje"=>$puntaje,
+                    "victoria"=>$victoria,"intento1"=>$numeroIntento,"intento3"=>$numeroIntento1,
+                    "intento4"=>$numeroIntento2,"intento5"=>$numeroIntento3,"intento6"=>$numeroIntento4,];
 
 
 
@@ -106,8 +137,8 @@ if($opcion==1){
 }elseif($opcion==3){
     echo "Que numero de partida quiere ver: ";
     $numPartida= solicitarNumeroEntre(1,count($coleccionPartidas));
-    $numPartida = $numPartida;
-    echo "\n Partida WORDIX numero ". $numPartida . " : palabra: ". $coleccionPartidas[$numPartida-1]["palabraWordix "];
+    $numPartida = $numPartida-1;
+    echo "\n Partida WORDIX numero ". $numPartida . " : palabra: ". $coleccionPartidas[$numPartida]["palabraWordix "];
     echo "\n Jugador : ". $coleccionPartidas [$numPartida]["jugador"];
     echo "\n Puntaje : ". $coleccionPartidas [$numPartida]["puntaje"];
     if ($coleccionPartidas [$numPartida]["puntaje"] == 0){
@@ -146,7 +177,35 @@ if($opcion==1){
 
     
 }elseif($opcion==5){
-    
+    echo "Ingrese un nombre de jugador: ";
+    $jugador=trim(fgets(STDIN));
+    $i=0;
+    $bandera=true;
+    while($i<count($coleccionPartidas) && $bandera){
+       if($coleccionPartidas[$i]["jugador"]==$jugador){
+          $bandera=false;
+          $jugador=$coleccionPartidas[$i]["jugador"];
+          $resumen=generaResumen($coleccionPartidas,$jugador);
+       }
+        $coleccionPartidas[$i]["jugador"];
+        $i=$i+1;
+    }
+    if($bandera){
+        echo "no se encontro un jugador con ese nombre"
+    }else{
+        echo "jugador: ".$resumenPartidas["jugador"]=$jugador."\n";//aca iria el nombre del modulo ($resumen)
+        echo "Partidas: ".$resumenPartidas["partida"]=0;
+        echo "Puntaje Total: ".$resumenPartidas["puntaje"] ;
+        echo "Victorias: ".$resumenPartidas["vitoria"] ;
+        echo "Porcentaje Victorias: ";
+        echo "Adivinadas: ";
+        echo "      Intento 1: ".$resumenPartidas["intento1"] ;
+        echo "      Intento 2: ".$resumenPartidas["intento2"] ;
+        echo "      Intento 3: ".$resumenPartidas["intento3"] ;
+        echo "      Intento 4: ".$resumenPartidas["intento4"] ;
+        echo "      Intento 5: ".$resumenPartidas["intento5"] ;
+        echo "      Intento 6: ".$resumenPartidas["intento6"] ;
+    }  
 }elseif($opcion==6){
     
 }elseif($opcion==7){
