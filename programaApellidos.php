@@ -106,12 +106,11 @@ if($opcion==1){
 }elseif($opcion==3){
     $arrayPartidas = cargarColeccionPartida();
     echo "Que numero de partida quiere ver: ";
-    $numPartida= solicitarNumeroEntre(1,count($coleccionPartidas));
-    $numPartida = $numPartida;
-    echo "\n Partida WORDIX numero ". $numPartida . " : palabra: ". $coleccionPartidas[$numPartida-1]["palabraWordix "];
-    echo "\n Jugador : ". $coleccionPartidas [$numPartida]["jugador"];
-    echo "\n Puntaje : ". $coleccionPartidas [$numPartida]["puntaje"];
-    if ($coleccionPartidas [$numPartida]["puntaje"] == 0){
+    $numPartida= solicitarNumeroEntre(1,count($arrayPartidas));
+    echo "\n Partida WORDIX numero ". $numPartida . " : palabra: ". $arrayPartidas[$numPartida-1]["palabraWordix "];
+    echo "\n Jugador : ". $arrayPartidas [$numPartida]["jugador"];
+    echo "\n Puntaje : ". $arrayPartidas [$numPartida]["puntaje"];
+    if ($arrayPartidas [$numPartida]["puntaje"] == 0){
         echo "\n Intentos : No adivino la palabra.";
     }else{
         echo "\n Intentos : ". $arrayPartidas [$numPartida]["intentos"];
@@ -148,17 +147,18 @@ if($opcion==1){
 
     
 }elseif($opcion==5){
+    $arrayPartidas = cargarColeccionPartida();
     echo "Ingrese un nombre de jugador: ";
     $jugador=trim(fgets(STDIN));
     $i=0;
     $bandera=true;
-    while($i<count($coleccionPartidas) && $bandera){
-       if($coleccionPartidas[$i]["jugador"]==$jugador){
+    while($i<count($arrayPartidas) && $bandera){
+       if($arrayPartidas[$i]["jugador"]==$jugador){
           $bandera=false;
-          $jugador=$coleccionPartidas[$i]["jugador"];
-          $resumen=generaResumen($coleccionPartidas,$jugador);
+          $jugador=$arrayPartidas[$i]["jugador"];
+          $resumen=generaResumen($arrayPartidas,$jugador);
        }
-        $coleccionPartidas[$i]["jugador"];
+        $arrayPartidas[$i]["jugador"];
         $i=$i+1;
     }
     if($bandera){
