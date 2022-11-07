@@ -51,6 +51,8 @@ function cargarColeccionPartida (){
     $coleccionPartidas[11] = ["palabraWordix "=> "NIÑOS" , "jugador" => "pink2000", "intentos"=> 6, "puntaje" => 10];
    return $coleccionPartidas;
 }
+
+//FUNCION PUNTO 9)***************************
 //MODULO que retorna resumen del jugador dado el arreglo coleccion de partidas y el nombre deljugador
 /**
  * genera el historial de juego del jugador
@@ -115,12 +117,32 @@ function generaResumen($arrayPartidas,$jugador){
             }
        */
 }
-$resumenPartida=["jugador"=>$jugador,"partida"=>$contadorPartida,"puntaje"=>$puntaje,
+$resumenPartida=["jugador"=>$jugador,"partida"=>$contadorPartida,"puntaje"=>$puntaje,   //carga el resumen de las partidas(arreglo asociativo)
                     "victoria"=>$victoria,"intento1"=>$numeroIntento,"intento2"=>$numeroIntento1,
                     "intento3"=>$numeroIntento2,"intento4"=>$numeroIntento3,"intento5"=>$numeroIntento4,"intento6"=>$numeroIntento5];
 return $resumenPartida;
 }
-//MODULO  carga los resumenes de las partidas(arreglo asociativo)
+
+//   INCISO 10) EXPLICACION 3  ********************
+/**
+ *RETONA el nombre que ingresa en minusculas 
+ * @return string
+ */
+function solicitarJugador(){    
+    $bandera=true;
+    do{                  //va a seguir haciendo ciclos hasta que el usuario ingrese bien el nombre del jugador
+    echo "Ingrese nombre de un jugador";
+    $jugador=trim(fgets(STDIN));
+    if(ctype_alpha($jugador)){    //verifica que el nombre este compuesto por letras
+        $tieneLetra=strtolower($jugador);
+        $bandera=false;
+    }else{
+        echo "la cadena ".ctype_alpha($jugador). " no esta compuesta en su totalidad por letras \n";
+        echo "VUELVA A INGRESAR EL NOMBRE \n";
+     }
+    }while($bandera);
+    return $tieneLetra;  
+} 
    
 
 
@@ -235,8 +257,8 @@ if($opcion==1){
        }
         $i=$i+1;
     }
-    if($bandera){    
-        echo "no se encontro un jugador con ese nombre"; //si el nombre ingresado no se encuentra en el arreglo jamas va a entrar al primer IF de arriba
+    if($bandera){    //si el nombre ingresado no se encuentra en el arreglo jamas va a entrar al primer IF de arriba
+        echo "no se encontro un jugador con ese nombre"; 
     }else{
         $lasVictorias=$resumen["victoria"];
         $laPartida=$resumen["partida"];
@@ -255,6 +277,8 @@ if($opcion==1){
         echo "      Intento 6: ".$resumen["intento6"] ."\n";
     }  
 }elseif($opcion==6){
+   
+  
     
 }elseif($opcion==7){
     
