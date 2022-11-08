@@ -280,9 +280,18 @@ if($opcion==1){
    
       
 }elseif($opcion==7){
+    $arrayPalabras = cargarColeccionPalabras();
+   
+    do{
+        $indiceNuevaPalabra = count($arrayPalabras);
+        echo "Porfavor ingrese la palabra que quiera agregar al diccionario WORDIX ";
+        $arrayPalabras[$indiceNuevaPalabra+1] = leerPalabra5Letras();
+        echo "\n Gracias!! \n Desea agregar otra? (S/N)";
+        $decision = trim(fgets(STDIN));
+    }while ($decision == "s");
     
 }elseif($opcion==8){
-    
+    echo "Te esperamos la proxima!!";
 }
 
 
