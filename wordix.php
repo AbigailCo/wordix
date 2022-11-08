@@ -29,7 +29,7 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /**
  *  ****COMPLETAR*****
  */
-function solicitarNumeroEntre($min, $max)//solucionar el WHILE A  10, 5.5
+function solicitarNumeroEntre($min, $max)
 {
     //int $numero
     $numero = trim(fgets(STDIN));
@@ -322,12 +322,50 @@ function esIntentoGanado($estructuraPalabraIntento)
 /**
  * ****COMPLETAR***** documentación de la intefaz
  */
-function obtenerPuntajeWordix()  /* ****COMPLETAR***** parámetros formales necesarios */
-{
+function obtenerPuntajeWordix ($palabraIntento, $nroIntento){
+        $vocalesEncontradas = 0;
+        $letrasGrupo1= 0;
+        $letrasGrupo2= 0;
+        $sumaIntento = 0;
+        $palabraIntento = strtolower($palabraIntento); //Convertimos toda la cadena a minúscula
+        
+        $longitud = strlen($palabraIntento); //obtenemos las logitud de la palabra
+    
+        for ($indice = 0; $indice < $longitud; $indice++) { 
+    
+    
+            if (in_array($palabraIntento[$indice], ["a", "e", "i", "o", "u"])) //Ahora vemos si dicho carácter está dentro del arreglo ["a", "e", "i", "o", "u"]
+            {
+                $vocalesEncontradas++;
+            }
+            if (in_array($palabraIntento[$indice], ["b", "c", "d", "f", "g", "h","j","k","l", "m"]))
+            {
+                $letrasGrupo1++; 
+            }
+            if (in_array($palabraIntento[$indice], ["n", "o", "p", "q", "r", "s","t","v","w", "x","y","z"]))
+            {
+                $letrasGrupo2++; 
+            }
+        }
+        if($nroIntento == 1) {
+            $sumaIntento = 6;
+        }elseif($nroIntento == 2) {
+            $sumaIntento = 5;
+        }elseif($nroIntento == 3) {
+            $sumaIntento = 4;
+        }elseif($nroIntento == 4) {
+            $sumaIntento = 3;
+        }elseif($nroIntento == 5) {
+            $sumaIntento = 2;
+        }elseif($nroIntento == 6) {
+            $sumaIntento = 1;
+        }
 
-    /* ****COMPLETAR***** cuerpo de la función*/
-    return 0;
+        $puntosLetras = $vocalesEncontradas + ($letrasGrupo1*2) + ($letrasGrupo2*3) + $sumaIntento;
+        return $puntosLetras;//Este modulo retorna un INT con el total de los puntos por letra e intentos
 }
+
+
 
 /**
  * Dada una palabra para adivinar, juega una partida de wordix intentando que el usuario adivine la palabra.
@@ -361,7 +399,7 @@ function jugarWordix($palabraWordix, $nombreUsuario)
 
     if ($ganoElIntento) {
         $nroIntento--;
-        $puntaje = obtenerPuntajeWordix();
+        $puntaje = obtenerPuntajeWordix($palabraWordix, $nroIntento);
         echo "Adivinó la palabra Wordix en el intento " . $nroIntento . "!: " . $palabraIntento . " Obtuvo $puntaje puntos!";
     } else {
         $nroIntento = 0; //reset intento

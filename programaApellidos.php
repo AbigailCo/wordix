@@ -278,8 +278,7 @@ if($opcion==1){
     }  
 }elseif($opcion==6){
    
-  
-    
+      
 }elseif($opcion==7){
     
 }elseif($opcion==8){
