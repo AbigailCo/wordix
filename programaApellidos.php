@@ -148,16 +148,22 @@ function solicitarJugador(){
 function comparacion($partida1,$partida2){
     if($partida1["jugador"]==$partida2["jugador"]){
         if($partida1["palabraWordix"]==$partida2["palabraWordix"]){
-            return 0;
-    }elseif($partida1["jugador"]<$partida2["jugador"]){
-        if($partida1["palabraWordix"]<$partida2["palabraWordix"]){
-            return -1;
-    }
+            $orden= 0;
+        }elseif($partida1["palabraWordix"]>$partida2["palabraWordix"]){
+                $orden= 1;
+        }else{
+            $orden= -1;
+        }
+    }elseif($partida1["jugador"]>$partida2["jugador"]){
+                $orden= 1;
+        
     }else{
-        return 1;
-}
-}
+            $orden= -1;
+        }
+    
+    
 
+    return $orden;
 }
     /* if($a==$b){
     return 0;
@@ -173,15 +179,26 @@ function comparacion($partida1,$partida2){
  */
 function muestraArrayOrdenado($arrayPartidas){
     
-    $partida1=$arrayPartidas[0];
-    $partida2=$arrayPartidas[1];
-    comparacion($partida1,$partida2);
+    
+    
     uasort($arrayPartidas, "comparacion");
     print_r($arrayPartidas);
 
 
 }
-
+function jugoConPalabra ($jugador, $palabraWordix){
+    $bandera = true;
+    $i=0;
+    $arrayPartidas=cargarColeccionPartida();
+    while($i<count($arrayPartidas)&& $bandera){
+        if($arrayPartidas[$i]["jugador"]==$jugador){
+            if($arrayPartidas[$i]["palabraWordix"]==$palabraWordix){
+                $bandera=false;
+            }
+        }
+    }
+    return $bandera;
+}
 //FUNCION PARA LA OPCION 7 
 /**
  * VERIFICA que la plabra que ingresamos no este en el arreglo $coleccionDePalabras
@@ -240,6 +257,7 @@ do{
              $nombre=trim(fgets(STDIN));
              echo "Numero de palabra que desea jugar: ";
              $numeroPalabra=solicitarNumeroEntre($min,$max);
+
              $partida = jugarWordix($palabraWordix[$numeroPalabra-1], strtolower($nombre));
             break;
         case 2:
@@ -327,7 +345,7 @@ do{
             break;
         case 6:
             $arrayPartidas=cargarColeccionPartida();
-            $partida1=$arrayPartidas[0];
+            $partida1=$arrayPartidas[0]["jugador"];
             $partida2=$arrayPartidas[1];
             comparacion($partida1,$partida2);
             muestraArrayOrdenado($arrayPartidas);
