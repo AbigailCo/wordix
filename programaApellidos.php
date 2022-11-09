@@ -33,18 +33,18 @@ function cargarColeccionPartida (){
     //sin parametros formales
     //array $coleccionPartidas
     $coleccionPartidas=[];
-    $coleccionPartidas[0] = ["palabraWordix "=> "QUESO" , "jugador" => "majo", "intentos"=> 0, "puntaje" => 0];
-    $coleccionPartidas[1] = ["palabraWordix "=> "CASAS" , "jugador" => "rudolf", "intentos"=> 3, "puntaje" => 14];
-    $coleccionPartidas[2] = ["palabraWordix "=> "PIANO" , "jugador" => "pink2000", "intentos"=> 6, "puntaje" => 10];
-    $coleccionPartidas[3] = ["palabraWordix "=> "YUYOS" , "jugador" => "majo", "intentos"=> 0, "puntaje" => 0];
-    $coleccionPartidas[4] = ["palabraWordix "=> "TINTO" , "jugador" => "rudolf", "intentos"=> 3, "puntaje" => 14];
-    $coleccionPartidas[5] = ["palabraWordix "=> "HUEVO" , "jugador" => "pink2000", "intentos"=> 6, "puntaje" => 10];
-    $coleccionPartidas[6] = ["palabraWordix "=> "PISOS" , "jugador" => "majo", "intentos"=> 0, "puntaje" => 0];
-    $coleccionPartidas[7] = ["palabraWordix "=> "FUEGO" , "jugador" => "rudolf", "intentos"=> 3, "puntaje" => 14];
-    $coleccionPartidas[8] = ["palabraWordix "=> "GOTAS" , "jugador" => "pink2000", "intentos"=> 6, "puntaje" => 10];
-    $coleccionPartidas[9] = ["palabraWordix "=> "QUESO" , "jugador" => "majo", "intentos"=> 0, "puntaje" => 0];
-    $coleccionPartidas[10] = ["palabraWordix "=> "CASAS" , "jugador" => "rudolf", "intentos"=> 3, "puntaje" => 14];
-    $coleccionPartidas[11] = ["palabraWordix "=> "NIÑOS" , "jugador" => "pink2000", "intentos"=> 6, "puntaje" => 10];
+    $coleccionPartidas[0] = ["palabraWordix"=> "QUESO" , "jugador" => "majo", "intentos"=> 0, "puntaje" => 0];
+    $coleccionPartidas[1] = ["palabraWordix"=> "CASAS" , "jugador" => "rudolf", "intentos"=> 3, "puntaje" => 14];
+    $coleccionPartidas[2] = ["palabraWordix"=> "PIANO" , "jugador" => "pink2000", "intentos"=> 6, "puntaje" => 10];
+    $coleccionPartidas[3] = ["palabraWordix"=> "YUYOS" , "jugador" => "majo", "intentos"=> 0, "puntaje" => 0];
+    $coleccionPartidas[4] = ["palabraWordix"=> "TINTO" , "jugador" => "rudolf", "intentos"=> 3, "puntaje" => 14];
+    $coleccionPartidas[5] = ["palabraWordix"=> "HUEVO" , "jugador" => "pink2000", "intentos"=> 6, "puntaje" => 10];
+    $coleccionPartidas[6] = ["palabraWordix"=> "PISOS" , "jugador" => "majo", "intentos"=> 0, "puntaje" => 0];
+    $coleccionPartidas[7] = ["palabraWordix"=> "FUEGO" , "jugador" => "rudolf", "intentos"=> 3, "puntaje" => 14];
+    $coleccionPartidas[8] = ["palabraWordix"=> "GOTAS" , "jugador" => "pink2000", "intentos"=> 6, "puntaje" => 10];
+    $coleccionPartidas[9] = ["palabraWordix"=> "QUESO" , "jugador" => "majo", "intentos"=> 0, "puntaje" => 0];
+    $coleccionPartidas[10] = ["palabraWordix"=> "CASAS" , "jugador" => "rudolf", "intentos"=> 3, "puntaje" => 14];
+    $coleccionPartidas[11] = ["palabraWordix"=> "MELON" , "jugador" => "pink2000", "intentos"=> 6, "puntaje" => 10];
    return $coleccionPartidas;
 }
 
@@ -97,20 +97,7 @@ function generaResumen($arrayPartidas,$jugador){
                 $victoria=$victoria+1;
             }
         }
-            /*if($arrayPartidas[$i]["intentos"]==1){   otra opcion para calcular los intentos
-                $numeroIntento=$numeroIntento+1;
-            }elseif($arrayPartidas[$i]["intentos"]==2){
-                $numeroIntento1=$numeroIntento1+1;
-            }elseif($arrayPartidas[$i]["intentos"]==3){
-                $numeroIntento2=$numeroIntento2+1;
-            }elseif($arrayPartidas[$i]["intentos"]==4){
-                $numeroIntento3=$numeroIntento3+1;
-            }elseif($arrayPartidas[$i]["intentos"]==5){
-                $numeroIntento4=$numeroIntento4+1;
-            }elseif($arrayPartidas[$i]["intentos"]==6){
-                $numeroIntento5=$numeroIntento5+1;
-            }
-       */
+           
 }
 $resumenPartida=["jugador"=>$jugador,"partida"=>$contadorPartida,"puntaje"=>$puntaje,   //carga el resumen de las partidas(arreglo asociativo)
                     "victoria"=>$victoria,"intento1"=>$numeroIntento,"intento2"=>$numeroIntento1,
@@ -165,37 +152,22 @@ function comparacion($partida1,$partida2){
 
     return $orden;
 }
-    /* if($a==$b){
-    return 0;
-   }elseif($a>$b){
-    return -1;
-   }else{
-    return 1;
-   }  */
-
-/**
- *INCISO 11 EXPLICACION 3 
- *
- */
 function muestraArrayOrdenado($arrayPartidas){
-    
-    
-    
     uasort($arrayPartidas, "comparacion");
     print_r($arrayPartidas);
-
-
 }
+
 function jugoConPalabra ($jugador, $palabraWordix){
-    $bandera = true;
+    $bandera = false;
     $i=0;
     $arrayPartidas=cargarColeccionPartida();
     while($i<count($arrayPartidas)&& $bandera){
         if($arrayPartidas[$i]["jugador"]==$jugador){
             if($arrayPartidas[$i]["palabraWordix"]==$palabraWordix){
-                $bandera=false;
+                $bandera=true;
             }
         }
+        $i++;
     }
     return $bandera;
 }
@@ -251,14 +223,26 @@ do{
     switch($opcion){
         case 1:
              $palabraWordix=cargarColeccionPalabras();
+             $arrayPartidas= cargarColeccionPartida();
              $min=1;
              $max=count($palabraWordix); // count va guardar la cantida de elementos en el arreglo 
              echo "Ingrese su nombre: ";
              $nombre=trim(fgets(STDIN));
              echo "Numero de palabra que desea jugar: ";
              $numeroPalabra=solicitarNumeroEntre($min,$max);
+             $i=0;
+             $bandera=false;
+            while($i<count($arrayPartidas) && !$bandera){
+             if($arrayPartidas[$i]["jugador"]==$nombre){   
+             echo "Ingrese otro numero ya jugo con esa palabra: ";
+             $numeroPalabra=solicitarNumeroEntre($min,$max);
+             $bandera= jugoConPalabra($nombre,$palabraWordix[$numeroPalabra-1] );
+             }
+             $i++;
+            }
 
-             $partida = jugarWordix($palabraWordix[$numeroPalabra-1], strtolower($nombre));
+            $partida = jugarWordix($palabraWordix[$numeroPalabra-1], strtolower($nombre));
+        
             break;
         case 2:
              $palabraWordix=cargarColeccionPalabras();
@@ -267,6 +251,10 @@ do{
              echo "Ingrese su nombre: ";
              $nombre=trim(fgets(STDIN));
              $numAleatorio= mt_rand($min, $max -1); //use mt_rand para obtener un numero aleatorio dentro de un rango
+             do{
+                $bandera= jugoConPalabra($nombre,$palabraWordix[$numAleatorio] );
+            }while ($bandera);
+   
             $partida = jugarWordix($palabraWordix[$numAleatorio], strtolower($nombre));//$numAleatorio va ser mi indice para la palabra aleatoria
             break;
         case 3;
@@ -345,9 +333,7 @@ do{
             break;
         case 6:
             $arrayPartidas=cargarColeccionPartida();
-            $partida1=$arrayPartidas[0]["jugador"];
-            $partida2=$arrayPartidas[1];
-            comparacion($partida1,$partida2);
+    
             muestraArrayOrdenado($arrayPartidas);
   
             break;
