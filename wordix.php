@@ -1,8 +1,7 @@
 <?php
 
 /*
-La librería JugarWordix posee la definición de constantes y funciones necesarias
-para jugar al Wordix.
+La librería JugarWordix posee la definición de constantes y funciones necesarias para jugar al Wordix.
 Puede ser utilizada por cualquier programador para incluir en sus programas.
 */
 
@@ -26,14 +25,23 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
-/**
- *  ****COMPLETAR*****
+
+/**Modulo solicita un numero y compara que este dentro de un rango
+ * @param int $min
+ * @param int $max
+ * @return int 
  */
 function solicitarNumeroEntre($min, $max)
 {
     //int $numero
     $numero = trim(fgets(STDIN));
-    while (!is_int($numero)  && !($numero >= $min && $numero <= $max)) {
+    while (!ctype_digit ($numero)) {
+        //ctype_digit Devuelve true si cada caracter del texto es un dígito decimal, o false de lo contrario.
+        echo "ERROR! Debe ingresar un número entre " . $min . " y " . $max . ", sin comas ni caracteres: ";
+        $numero = trim(fgets(STDIN));
+    }
+    while (!is_int($numero + 0)  || !($numero >= $min && $numero <= $max)) {
+        //is_int Devuelve true si var es de tipo integer, o false de lo contrario.
         echo "ERROR! Debe ingresar un número entre " . $min . " y " . $max . ": ";
         $numero = trim(fgets(STDIN));
     }
@@ -42,7 +50,7 @@ function solicitarNumeroEntre($min, $max)
 
 /**
  * Escrbir un texto en color ROJO
- * @param string $texto)
+ * @param string $texto
  */
 function escribirRojo($texto)
 {
@@ -51,7 +59,7 @@ function escribirRojo($texto)
 
 /**
  * Escrbir un texto en color VERDE
- * @param string $texto)
+ * @param string $texto
  */
 function escribirVerde($texto)
 {
@@ -60,7 +68,7 @@ function escribirVerde($texto)
 
 /**
  * Escrbir un texto en color AMARILLO
- * @param string $texto)
+ * @param string $texto
  */
 function escribirAmarillo($texto)
 {
@@ -69,7 +77,7 @@ function escribirAmarillo($texto)
 
 /**
  * Escrbir un texto en color GRIS
- * @param string $texto)
+ * @param string $texto
  */
 function escribirGris($texto)
 {
@@ -78,7 +86,7 @@ function escribirGris($texto)
 
 /**
  * Escrbir un texto pantalla.
- * @param string $texto)
+ * @param string $texto
  */
 function escribirNormal($texto)
 {
@@ -112,7 +120,9 @@ function escribirSegunEstado($texto, $estado)
 }
 
 /**
- * ****COMPLETAR*****
+ * Modulo escribe el mensaje de bienvenida
+ * @param string $usuario
+ * sin retorno
  */
 function escribirMensajeBienvenida($usuario)
 {
@@ -125,11 +135,14 @@ function escribirMensajeBienvenida($usuario)
 
 
 /**
- * ****COMPLETAR*****
+ * Modulo comprueba si la letra se encuentra en la palabra de la partida
+ * @param string $cadena
+ * @return boolean
  */
 function esPalabra($cadena)
 {
-    //int $cantCaracteres, $i, boolean $esLetra
+    //int $cantCaracteres, $i, 
+    //boolean $esLetra
     $cantCaracteres = strlen($cadena);
     $esLetra = true;
     $i = 0;
@@ -141,7 +154,9 @@ function esPalabra($cadena)
 }
 
 /**
- *  ****COMPLETAR*****
+ * Modulo solicita una palabra de 5 letras y ademas verifica que este correcta
+ * sin parametros formales
+ * @return string
  */
 function leerPalabra5Letras()
 {
@@ -159,7 +174,8 @@ function leerPalabra5Letras()
 
 
 /**
- * Inicia una estructura de datos Teclado. La estructura es de tipo: ¿Indexado, asociativo o Multidimensional?
+ * Inicia una estructura de datos Teclado. La estructura es de tipo asociativo
+ * Sin parametros formales
  *@return array
  */
 function iniciarTeclado()
@@ -179,6 +195,7 @@ function iniciarTeclado()
 /**
  * Escribe en pantalla el estado del teclado. Acomoda las letras en el orden del teclado QWERTY
  * @param array $teclado
+ * sin retorno
  */
 function escribirTeclado($teclado)
 {
@@ -209,11 +226,13 @@ function escribirTeclado($teclado)
 /**
  * Escribe en pantalla los intentos de Wordix para adivinar la palabra
  * @param array $estruturaIntentosWordix
+ * sin retorno
  */
 function imprimirIntentosWordix($estructuraIntentosWordix)
 {
     $cantIntentosRealizados = count($estructuraIntentosWordix);
-    //$cantIntentosFaltantes = CANT_INTENTOS - $cantIntentosRealizados;
+    //int $cantIntentosFaltantes $i $cantIntentosRealizados $j 
+    //array $estructuraIntento $intentiLetra
 
     for ($i = 0; $i < $cantIntentosRealizados; $i++) {
         $estructuraIntento = $estructuraIntentosWordix[$i];
@@ -230,9 +249,11 @@ function imprimirIntentosWordix($estructuraIntentosWordix)
             escribirGris(" ");
         }
         echo "\n";
+        $cantIntentosFaltantes= $cantIntentosRealizados -1;
+        echo "\n" . "Le quedan " . $cantIntentosFaltantes  . " Intentos para adivinar la palabra!";
     }
-    //echo "\n" . "Le quedan " . $cantIntentosFaltantes . " Intentos para adivinar la palabra!";
-}
+    }
+   
 
 /**
  * Dada la palabra wordix a adivinar, la estructura para almacenar la información del intento 
@@ -241,12 +262,16 @@ function imprimirIntentosWordix($estructuraIntentosWordix)
  * @param string $palabraWordix
  * @param array $estruturaIntentosWordix
  * @param string $palabraIntento
- * @return array estructura wordix modificada
+ * @return array 
  */
 function analizarPalabraIntento($palabraWordix, $estruturaIntentosWordix, $palabraIntento)
 {
+    /** INT $cantCaracteres $i $posicion
+     * STRING $palabraIntento $letraIntento $palabraWordix $estado
+     * ARRAY $estruturaIntentosWordix $estructuraPalabraIntento
+     */
     $cantCaracteres = strlen($palabraIntento);
-    $estructuraPalabraIntento = []; /*almacena cada letra de la palabra intento con su estado */
+    $estructuraPalabraIntento = []; //almacena cada letra de la palabra intento con su estado 
     for ($i = 0; $i < $cantCaracteres; $i++) {
         $letraIntento = $palabraIntento[$i];
         $posicion = strpos($palabraWordix, $letraIntento);
@@ -337,12 +362,10 @@ function obtenerPuntajeWordix ($palabraIntento, $nroIntento){
             if (in_array($palabraIntento[$indice], ["a", "e", "i", "o", "u"])) //Ahora vemos si dicho carácter está dentro del arreglo ["a", "e", "i", "o", "u"]
             {
                 $vocalesEncontradas++;
-            }
-            if (in_array($palabraIntento[$indice], ["b", "c", "d", "f", "g", "h","j","k","l", "m"]))
+            }elseif (in_array($palabraIntento[$indice], ["b", "c", "d", "f", "g", "h","j","k","l", "m"]))
             {
                 $letrasGrupo1++; 
-            }
-            if (in_array($palabraIntento[$indice], ["n", "o", "p", "q", "r", "s","t","v","w", "x","y","z"]))
+            }elseif (in_array($palabraIntento[$indice], ["n", "o", "p", "q", "r", "s","t","v","w", "x","y","z"]))
             {
                 $letrasGrupo2++; 
             }
