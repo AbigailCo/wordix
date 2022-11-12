@@ -259,16 +259,14 @@ do{
             $arrayPartidas[count($arrayPartidas)]=["palabraWordix"=>$partida["palabraWordix"], "jugador"=>$nombre, "intentos"=>$partida["intentos"], "puntaje"=>$partida["puntaje"]];
             print_r($arrayPartidas);
         case 2:
-             $palabraWordix=cargarColeccionPalabras();
              $min=0;
-            $max=count($palabraWordix); 
+             $max=count($palabraWordix); 
              echo "Ingrese su nombre: ";
              $nombre=trim(fgets(STDIN));
              $numAleatorio= mt_rand($min, $max -1); //use mt_rand para obtener un numero aleatorio dentro de un rango
              do{
-                $bandera= jugoConPalabra($nombre,$palabraWordix[$numAleatorio],$arrayPartidas );
+                $bandera= jugoConPalabra($nombre,$palabraWordix[$numAleatorio-1],$arrayPartidas );
             }while ($bandera);
-   
             $partida = jugarWordix($palabraWordix[$numAleatorio], strtolower($nombre));//$numAleatorio va ser mi indice para la palabra aleatoria
             break;
         case 3;
