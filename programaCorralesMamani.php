@@ -267,6 +267,7 @@ do{
                 $i=$i+1;
             }
             $partida = jugarWordix($palabraWordix[$numAleatorio], strtolower($nombre));//$numAleatorio va ser mi indice para la palabra aleatoria
+            $arrayPartidas[count($arrayPartidas)]=["palabraWordix"=>$partida["palabraWordix"], "jugador"=>$nombre, "intentos"=>$partida["intentos"], "puntaje"=>$partida["puntaje"]];
             break;
         case 3;
              echo "Que numero de partida quiere ver: ";
@@ -320,7 +321,7 @@ do{
              $i=$i+1;
             }
             if($bandera){    //si el nombre ingresado no se encuentra en el arreglo jamas va a entrar al primer IF de arriba
-                 echo "no se encontro un jugador con ese nombre"; 
+                echo "no se encontro un jugador con ese nombre"; 
             }else{
                 $lasVictorias=$resumen["victoria"];
                 $laPartida=$resumen["partida"];
